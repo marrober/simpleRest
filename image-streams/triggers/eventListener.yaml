@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: image-import-event-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - ref: image-import-pipeline-binding
+    name: quay-listener
+    template:
+      name: image-import-trigger-pipeline-template

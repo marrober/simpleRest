@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  labels:
+    pipeline.openshift.io/type: kubernetes
+  name: import-image
+spec:
+  params:
+  - name: image-stream-name
+    type: string
+  tasks:
+  - name: import-image
+    params:
+      - name: ARGS
+        value: 
+        - "import-image"
+        - $(params.image-stream-name)
+        - "--confirm"
+        - "--all"
+    taskRef:
+      kind: ClusterTask
+      name: openshift-client

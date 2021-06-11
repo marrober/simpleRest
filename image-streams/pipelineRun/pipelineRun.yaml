@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: import-image-pr-
+spec:
+  pipelineRef:
+    name: import-image
+  params:
+    - name: image-stream-name
+      value: "ubi"

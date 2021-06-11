@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: default-route-openshift-image-registry.apps.cluster-c92e.c92e.sandbox1294.opentlc.com/image-streams/ubi:latest
+          command:
+            - "/bin/bash"
+            - "-c"
+            - "while true; do ls /root/buildinfo/; sleep 30; done"

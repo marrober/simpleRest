@@ -1,0 +1,17 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: image-import-trigger-pipeline-template
+spec:
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: import-image-pr-tr-
+    spec:
+      serviceAccountName: pipeline
+      pipelineRef:
+        name: import-image
+      params:
+      - name: image-stream-name
+        value: ubi
